@@ -4,7 +4,10 @@
 
 {% block body %}
     <link rel="stylesheet" href="{{ asset('css/list_styles.css') }}">
-    <div class="header" style="text-align: end"><button id="removeAllButton">Usuń wszystkie</button></div>
+    <div class="header">
+        <button id="removeAllButton" class="left-button">Usuń wszystkie</button>
+        <button id="logoutButton" onclick="window.location.href='{{ path('app_logout') }}';" class="right-button">Wyloguj</button>
+    </div>
     <div style="width: 100%">
         <table class="custom-table">
             <thead>

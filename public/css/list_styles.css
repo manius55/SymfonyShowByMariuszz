@@ -46,3 +46,20 @@
 .custom-table button:hover {
     background-color: #c50101;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#logoutButton {
+    padding: 5px 10px;
+    background-color: #efefef;
+    color: #211f1f;
+    border: solid;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 120px;
+    height: 35px;
+}
