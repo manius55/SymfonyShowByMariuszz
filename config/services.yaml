@@ -9,6 +9,8 @@ services:
     Symfony\Contracts\HttpClient\HttpClientInterface:  '@http_client'
     Doctrine\ORM\EntityManagerInterface: '@doctrine.orm.entity_manager'
     Psr\Log\LoggerInterface: '@monolog.logger.main'
+    App\Interfaces\PostTransformerInterface:
+        class: App\Transformers\PostTransformer
 
 
     App\:

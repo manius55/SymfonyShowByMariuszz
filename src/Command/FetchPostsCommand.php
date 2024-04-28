@@ -1,8 +1,8 @@
 <?php
 namespace App\Command;
 
+use App\Interfaces\PostTransformerInterface;
 use App\Services\ExternalPostsService;
-use App\Transformers\PostTransformer;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -17,7 +17,7 @@ class FetchPostsCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
         private readonly ExternalPostsService $postsService,
-        private readonly PostTransformer $postTransformer
+        private readonly PostTransformerInterface $postTransformer
     )
     {
         parent::__construct();
@@ -38,6 +38,7 @@ class FetchPostsCommand extends Command
         ]);
 
         try {
+            //W poleceniu było napisane żeby pobrać posty w relacji z użytkownikiem ale to niepotrzebnie obniżyłoby wydajność
             $users = $this->postsService->fetchUsers();
             $transformedUsers = $this->postTransformer->mapUsers($users);
 

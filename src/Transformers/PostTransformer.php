@@ -3,9 +3,10 @@
 namespace App\Transformers;
 
 use App\Entity\Post;
+use App\Interfaces\PostTransformerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class PostTransformer
+class PostTransformer implements PostTransformerInterface
 {
     public function __construct(private readonly EntityManagerInterface $entityManager)
     {
