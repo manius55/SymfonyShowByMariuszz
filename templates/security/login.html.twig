@@ -1,0 +1,53 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('css/login_styles.css') }}">
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 25%;">
+
+            </td>
+            <td style="width: 50%;">
+                <div class="login-container">
+                    <form method="post" class="login-form" style="margin-bottom: 20px;">
+                        {% if error %}
+                            <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="logged-in">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        {% endif %}
+
+                        <h1 style="color: #7d8492">Please sign in</h1>
+                        <div class="form-group">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" required>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+
+                        <button type="submit">Sign in</button>
+                    </form>
+                </div>
+            </td>
+            <td style="width: 25%">
+
+            </td>
+        </tr>
+    </table>
+{% endblock %}
