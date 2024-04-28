@@ -11,5 +11,6 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(): JsonResponse
     {
+        return $this->json('');
     }
 }

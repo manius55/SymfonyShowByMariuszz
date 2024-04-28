@@ -3,7 +3,7 @@
 namespace App\Transformers;
 
 use App\Entity\Post;
-use App\Interfaces\PostTransformerInterface;
+use App\Interfaces\Transformers\PostTransformerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PostTransformer implements PostTransformerInterface

@@ -21,7 +21,7 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
-                path: /
+
     access_control:
         - { path: ^/login$, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }

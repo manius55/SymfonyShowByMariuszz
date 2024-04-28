@@ -1,4 +1,3 @@
-{# templates/security/login.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
@@ -15,12 +14,6 @@
                     <form method="post" class="login-form" style="margin-bottom: 20px;">
                         {% if error %}
                             <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
-
-                        {% if app.user %}
-                            <div class="logged-in">
-                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                            </div>
                         {% endif %}
 
                         <h1 style="color: #7d8492">Please sign in</h1>

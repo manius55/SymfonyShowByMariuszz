@@ -1,7 +1,8 @@
 <?php
 namespace App\Command;
 
-use App\Interfaces\PostTransformerInterface;
+use App\Interfaces\Repository\PostRepositoryInterface;
+use App\Interfaces\Transformers\PostTransformerInterface;
 use App\Services\ExternalPostsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -17,7 +18,8 @@ class FetchPostsCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
         private readonly ExternalPostsService $postsService,
-        private readonly PostTransformerInterface $postTransformer
+        private readonly PostTransformerInterface $postTransformer,
+        private readonly PostRepositoryInterface $postRepository
     )
     {
         parent::__construct();
@@ -45,6 +47,8 @@ class FetchPostsCommand extends Command
             $posts = $this->postsService->fetchPosts();
 
             $this->postTransformer->transformPostsAndPersist($posts, $transformedUsers);
+
+            $this->postRepository->softDeleteAllPosts();
 
             $this->entityManager->flush();
 

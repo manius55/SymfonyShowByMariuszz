@@ -30,6 +30,9 @@ class Post
     #[ORM\Column(type: 'string', length: 255)]
     private string $authorName;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $deletedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +80,15 @@ class Post
     {
         $this->authorName = $authorName;
         return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): void
+    {
+        $this->deletedAt = $deletedAt;
     }
 }
