@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends AbstractController
 {
+    public function __construct(private readonly PostRepositoryInterface $postRepository)
+    {}
     #[Route('/list', name: 'post_list', methods: ['GET'])]
-    public function index(PostRepositoryInterface $postsRepository): Response
+    public function index(): Response
     {
-        $postsList = $postsRepository->getPostsList();
+        $postsList = $this->postRepository->getPostsList();
 
         return $this->render('post/list.html.twig', [
             'posts' => $postsList
@@ -21,17 +23,17 @@ class PostController extends AbstractController
     }
 
     #[Route('/api/posts/{id}', name: '_api_/posts/{id}{._format}_delete', methods: ['DELETE'])]
-    public function softDelete(Post $post, PostRepositoryInterface $postRepository): Response
+    public function softDelete(Post $post): Response
     {
-        $postRepository->softDelete($post);
+        $this->postRepository->softDelete($post);
 
         return $this->json(['status' => 'Post soft deleted'], 200);
     }
 
     #[Route('/api/posts', name: '_api_/posts/remove', methods: ['DELETE'])]
-    public function softDeleteAllPosts(PostRepositoryInterface $postRepository): Response
+    public function softDeleteAllPosts(): Response
     {
-        $postRepository->softDeleteAllPosts();
+        $this->postRepository->softDeleteAllPosts();
 
         return $this->json(['status' => 'All post soft deleted'], 200);
     }
