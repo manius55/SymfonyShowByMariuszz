@@ -13,6 +13,7 @@
                         <h1>Register</h1>
 
                         {{ form_start(registrationForm) }}
+
                         <div class="form-group">
                             {{ form_label(registrationForm.username) }}
                             {{ form_widget(registrationForm.username) }}
@@ -20,20 +21,27 @@
                                 <div class="alert alert-danger">{{ error.message }}</div>
                             {% endfor %}
                         </div>
+
                         <div class="form-group">
-                        {{ form_label(registrationForm.plainPassword) }}
-                        {{ form_widget(registrationForm.plainPassword) }}
-                        {% for error in registrationForm.plainPassword.vars.errors %}
-                            <div class="alert alert-danger">{{ error.message }}</div>
-                        {% endfor %}
+                            {{ form_label(registrationForm.plainPassword.first, 'Password') }}
+                            {{ form_widget(registrationForm.plainPassword.first) }}
+                            {% for error in registrationForm.plainPassword.first.vars.errors %}
+                                <div class="alert alert-danger">{{ error.message }}</div>
+                            {% endfor %}
                         </div>
+
                         <div class="form-group">
-                            <label for="inputPasswordRepeat">Repeat Password</label>
-                            <input type="password" id="inputPasswordRepeat" name="plainPasswordRepeat" required>
+                            {{ form_label(registrationForm.plainPassword.second, 'Repeat Password') }}
+                            {{ form_widget(registrationForm.plainPassword.second) }}
+                            {% for error in registrationForm.plainPassword.second.vars.errors %}
+                                <div class="alert alert-danger">{{ error.message }}</div>
+                            {% endfor %}
                         </div>
+
                         <div>
                             <button type="submit" class="btn">Register</button>
                         </div>
+
                         {{ form_end(registrationForm) }}
                     </div>
                 </div>
@@ -41,15 +49,4 @@
             <td style="width: 25%"></td>
         </tr>
     </table>
-
-    <script>
-        document.querySelector('form').onsubmit = function (event) {
-            const password = document.getElementById('registration_form_plainPassword').value;
-            const passwordRepeat = document.getElementById('inputPasswordRepeat').value;
-            if (password !== passwordRepeat) {
-                event.preventDefault();
-                alert('Passwords do not match.');
-            }
-        };
-    </script>
 {% endblock %}
